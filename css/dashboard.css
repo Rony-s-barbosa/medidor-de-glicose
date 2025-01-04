@@ -1,40 +1,106 @@
-/* Estilos específicos para a página de dashboard */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
-  }
-  
-  header {
-    background-color: #4CAF50;
-    padding: 20px;
-    text-align: center;
-  }
-  
-  h1 {
-    margin: 0;
-    color: white;
-  }
-  
-  nav ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  nav ul li {
-    display: inline;
-    margin-right: 10px;
-  }
-  
-  nav ul li a {
-    color: white;
-    text-decoration: none;
-  }
-  
-  main {
-    padding: 20px;
-  }
-  
-  section {
-    margin-top: 20px;
-  }
-  
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+}
+
+header {
+  background-color: #6200ea;
+  color: white;
+  padding: 15px;
+  text-align: center;
+}
+
+header button {
+  background-color: white;
+  color: #6200ea;
+  border: none;
+  padding: 10px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+h1, h2 {
+  margin: 20px 0;
+}
+
+#selecao-ano {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+#ano-anterior, #ano-posterior {
+  background-color: #6200ea;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}
+
+#ano-atual {
+  margin: 0 15px;
+  font-size: 50px;
+  font-weight: bold;
+}
+
+.meses-flutuantes {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin: 20px;
+}
+
+.meses-flutuantes button {
+  background-color: #6200ea;
+  color: white;
+  border: none;
+  padding: 20px;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+.dias-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+  margin: 20px;
+}
+
+.dias-grid button {
+  background-color: #ffffff;
+  border: 1px solid #6200ea;
+  color: #6200ea;
+  padding: 15px;
+  cursor: pointer;
+}
+
+button {
+  border-radius: 5px;
+}
+
+.oculto {
+  display: none;
+}
+
+canvas {
+  margin: 20px auto;
+  display: block;
+  width: 80%;
+  height: auto;
+}
+
+.ss {
+  position: absolute;
+  left: 30px;
+  width: 100px;
+}
+
+.vt {
+  position: absolute;
+  right: 40px;
+  top: 20px;
+  width: 100px;
+}

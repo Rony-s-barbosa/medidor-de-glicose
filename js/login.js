@@ -1,23 +1,53 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const togglePassword = document.getElementById('toggle-password');
-    const passwordInput = document.getElementById('senha');
-    const loginForm = document.getElementById('login-form');
-  
-    // Função para alternar a visibilidade da senha
-    togglePassword.addEventListener('click', () => {
-      const type = passwordInput.type === 'password' ? 'text' : 'password';
-      passwordInput.type = type;
-      togglePassword.innerHTML = type === 'password' ? '&#128065;' : '&#128064;';
-    });
-  
-    // Evento de submissão do formulário
-    loginForm.addEventListener('submit', (event) => {
-      event.preventDefault(); // Previne o comportamento padrão do formulário
-  
-      // Aqui você pode adicionar a lógica de validação do login
-  
-      // Redireciona para a página index.html
-      window.location.href = 'index.html';  // Caminho para a página inicial
-    });
-  });
-  
+// Mostrar a seção de registro
+document.getElementById('show-register').addEventListener('click', function () {
+  document.getElementById('login-section').classList.add('hidden');
+  document.getElementById('register-section').classList.remove('hidden');
+});
+
+// Voltar para a seção de login
+document.getElementById('back-to-login').addEventListener('click', function () {
+  document.getElementById('register-section').classList.add('hidden');
+  document.getElementById('login-section').classList.remove('hidden');
+});
+
+// Login
+document.getElementById('login-form').addEventListener('submit', function (e) {
+  e.preventDefault();
+
+  const username = document.getElementById('username').value;
+  const password = document.getElementById('password').value;
+
+  const users = JSON.parse(localStorage.getItem('users')) || [];
+
+  const userFound = users.find(user => user.username === username && user.password === password);
+
+  if (userFound) {
+    alert("Login bem-sucedido!");
+    window.location.href = "index.html";
+  } else {
+    alert("Usuário ou senha incorretos.");
+  }
+});
+
+// Cadastro
+document.getElementById('register-form').addEventListener('submit', function (e) {
+  e.preventDefault();
+
+  const newUsername = document.getElementById('new-username').value;
+  const newPassword = document.getElementById('new-password').value;
+
+  let users = JSON.parse(localStorage.getItem('users')) || [];
+
+  // Verifica se o usuário já existe
+  if (users.some(user => user.username === newUsername)) {
+    alert("Usuário já cadastrado!");
+    return;
+  }
+
+  users.push({ username: newUsername, password: newPassword });
+  localStorage.setItem('users', JSON.stringify(users));
+
+  alert("Usuário cadastrado com sucesso!");
+  document.getElementById('register-section').classList.add('hidden');
+  document.getElementById('login-section').classList.remove('hidden');
+});

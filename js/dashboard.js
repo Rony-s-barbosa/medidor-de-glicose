@@ -1,66 +1,109 @@
-window.addEventListener('storage', () => {
-  atualizarContagens();
-  atualizarGrafico();
-});
+// Configuração inicial
+let anoAtual = new Date().getFullYear();
+const meses = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
 
-window.onload = function() {
-  atualizarContagens();
-  atualizarGrafico();
+window.onload = () => {
+  atualizarAno();
+  criarGradeMeses();
 };
 
-function atualizarContagens() {
-  const registros = JSON.parse(localStorage.getItem('registros')) || [];
-  let hipoglicemia = 0;
-  let hiperglicemia = 0;
-  let normal = 0;
-
-  registros.forEach(registro => {
-    const valor = parseInt(registro.valor);
-    if (valor < 70) hipoglicemia++;
-    else if (valor > 180) hiperglicemia++;
-    else normal++;
-  });
-
-  document.getElementById('contagem-hipoglicemia').textContent = hipoglicemia;
-  document.getElementById('contagem-hiperglicemia').textContent = hiperglicemia;
-  document.getElementById('contagem-normal').textContent = normal;
+// Atualizar o ano exibido
+function atualizarAno() {
+  document.getElementById("ano-atual").textContent = anoAtual;
 }
 
-function atualizarGrafico() {
-  const registros = JSON.parse(localStorage.getItem('registros')) || [];
-  const labels = ["06:00", "09:00", "12:00", "15:00", "18:00", "20:00"];
-  const glicoseData = [0, 0, 0, 0, 0, 0];
-  const glicoseCounts = [0, 0, 0, 0, 0, 0];
+// Navegação entre anos
+document.getElementById("ano-anterior").addEventListener("click", () => {
+  anoAtual--;
+  atualizarAno();
+});
 
-  registros.forEach(registro => {
-    const hora = parseInt(registro.hora.split(":")[0]);
-    let index = Math.floor((hora - 6) / 3);
-    if (index >= 0 && index < 6) {
-      glicoseData[index] += parseInt(registro.valor);
-      glicoseCounts[index]++;
-    }
+document.getElementById("ano-posterior").addEventListener("click", () => {
+  anoAtual++;
+  atualizarAno();
+});
+
+// Criar grade de meses
+function criarGradeMeses() {
+  const container = document.querySelector(".meses-flutuantes");
+  container.innerHTML = ""; // Limpar meses anteriores
+
+  meses.forEach((mes, index) => {
+    const botaoMes = document.createElement("button");
+    botaoMes.textContent = mes;
+    botaoMes.addEventListener("click", () => mostrarDias(index));
+    container.appendChild(botaoMes);
+  });
+}
+
+// Mostrar dias do mês selecionado
+function mostrarDias(mesIndex) {
+  document.getElementById("grade-meses").classList.add("oculto");
+  document.getElementById("calendario-dias").classList.remove("oculto");
+
+  const tituloMes = document.getElementById("titulo-mes");
+  tituloMes.textContent = `${meses[mesIndex]} ${anoAtual}`;
+
+  const diasContainer = document.querySelector(".dias-grid");
+  diasContainer.innerHTML = ""; // Limpar dias anteriores
+
+  const diasNoMes = new Date(anoAtual, mesIndex + 1, 0).getDate();
+  for (let dia = 1; dia <= diasNoMes; dia++) {
+    const data = new Date(anoAtual, mesIndex, dia);
+    const botaoDia = document.createElement("button");
+    botaoDia.textContent = `${dia} (${data.toLocaleDateString("pt-BR", { weekday: "short" })})`;
+    botaoDia.addEventListener("click", () => mostrarGrafico(dia, mesIndex));
+    diasContainer.appendChild(botaoDia);
+  }
+}
+
+// Mostrar gráfico do dia selecionado
+function mostrarGrafico(dia, mesIndex) {
+  document.getElementById("calendario-dias").classList.add("oculto");
+  document.getElementById("grafico-dia").classList.remove("oculto");
+
+  const tituloDia = document.getElementById("titulo-dia");
+  tituloDia.textContent = `Glicose - ${dia} de ${meses[mesIndex]} de ${anoAtual}`;
+
+  const registros = JSON.parse(localStorage.getItem("registros")) || [];
+  const registrosDia = registros.filter(registro => {
+    const [ano, mes, diaRegistro] = registro.data.split("-").map(Number);
+    return ano === anoAtual && mes - 1 === mesIndex && diaRegistro === dia;
   });
 
-  for (let i = 0; i < glicoseData.length; i++) {
-    if (glicoseCounts[i] > 0) glicoseData[i] /= glicoseCounts[i];
-  }
+  const horas = registrosDia.map(registro => registro.hora);
+  const valores = registrosDia.map(registro => registro.valor);
 
-  const ctx = document.getElementById('grafico').getContext('2d');
+  const ctx = document.getElementById("grafico").getContext("2d");
   new Chart(ctx, {
-    type: 'line',
+    type: "line",
     data: {
-      labels: labels,
+      labels: horas,
       datasets: [{
-        label: 'Média de Glicose',
-        data: glicoseData,
-        borderColor: 'rgb(75, 192, 192)',
-        fill: false
-      }]
+        label: "Glicose (mg/dL)",
+        data: valores,
+        borderColor: "rgb(75, 192, 192)",
+        borderWidth: 2,
+        fill: false,
+      }],
     },
     options: {
       scales: {
-        y: { beginAtZero: true }
-      }
-    }
+        x: { title: { display: true, text: "Horário" } },
+        y: { title: { display: true, text: "Valor de Glicose (mg/dL)" }, beginAtZero: true },
+      },
+    },
   });
 }
+
+// Voltar para meses
+document.getElementById("voltar-meses").addEventListener("click", () => {
+  document.getElementById("calendario-dias").classList.add("oculto");
+  document.getElementById("grade-meses").classList.remove("oculto");
+});
+
+// Voltar para dias
+document.getElementById("voltar-dias").addEventListener("click", () => {
+  document.getElementById("grafico-dia").classList.add("oculto");
+  document.getElementById("calendario-dias").classList.remove("oculto");
+});

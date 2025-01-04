@@ -9,26 +9,39 @@
 </head>
 <body>
   <header>
-    <h1>Dashboard - Controlador de Glicose</h1>
-    <nav>
-      <ul>
-        <li><a href="index.html">Registrar Glicose</a></li>
-        <li><a href="dashboard.html">Dashboard</a></li>
-      </ul>
-    </nav>
+    <a href="login.html"><button class="ss" type="submit">sair</button></a>
+    <h1>Dashboard de Glicose</h1>
+    <a href="index.html"><button class="vt">Voltar</button></a>
   </header>
 
-  <main>
-    <section id="contagem-condicoes">
-      <p><strong>Hipoglicemia: <span id="contagem-hipoglicemia">0</span></strong></p>
-      <p><strong>Hiperglicemia: <span id="contagem-hiperglicemia">0</span></strong></p>
-      <p><strong>Normal: <span id="contagem-normal">0</span></strong></p>
-    </section>
+  <!-- Grade de meses -->
+  <section id="grade-meses">
+    <h2>Selecione um Mês</h2>
+    <div id="selecao-ano">
+      <button id="ano-anterior">&lt;</button>
+      <span id="ano-atual"></span>
+      <button id="ano-posterior">&gt;</button>
+    </div>
+    <div class="meses-flutuantes">
+      <!-- Meses serão criados dinamicamente -->
+    </div>
+  </section>
 
-    <section id="grafico-glicose">
-      <canvas id="grafico"></canvas>
-    </section>
-  </main>
+  <!-- Grade de dias -->
+  <section id="calendario-dias" class="oculto">
+    <h2 id="titulo-mes"></h2>
+    <button id="voltar-meses">Voltar aos Meses</button>
+    <div class="dias-grid">
+      <!-- Dias do mês serão criados dinamicamente -->
+    </div>
+  </section>
+
+  <!-- Gráfico do dia -->
+  <section id="grafico-dia" class="oculto">
+    <h2 id="titulo-dia"></h2>
+    <button id="voltar-dias">Voltar aos Dias</button>
+    <canvas id="grafico"></canvas>
+  </section>
 
   <script src="../js/dashboard.js"></script>
 </body>
