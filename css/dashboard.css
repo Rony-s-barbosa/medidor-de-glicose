@@ -1,0 +1,40 @@
+/* Estilos específicos para a página de dashboard */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+  }
+  
+  header {
+    background-color: #4CAF50;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  h1 {
+    margin: 0;
+    color: white;
+  }
+  
+  nav ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  nav ul li {
+    display: inline;
+    margin-right: 10px;
+  }
+  
+  nav ul li a {
+    color: white;
+    text-decoration: none;
+  }
+  
+  main {
+    padding: 20px;
+  }
+  
+  section {
+    margin-top: 20px;
+  }
+  

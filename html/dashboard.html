@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Controlador de Glicose</title>
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <header>
+    <h1>Dashboard - Controlador de Glicose</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Registrar Glicose</a></li>
+        <li><a href="dashboard.html">Dashboard</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="contagem-condicoes">
+      <p><strong>Hipoglicemia: <span id="contagem-hipoglicemia">0</span></strong></p>
+      <p><strong>Hiperglicemia: <span id="contagem-hiperglicemia">0</span></strong></p>
+      <p><strong>Normal: <span id="contagem-normal">0</span></strong></p>
+    </section>
+
+    <section id="grafico-glicose">
+      <canvas id="grafico"></canvas>
+    </section>
+  </main>
+
+  <script src="../js/dashboard.js"></script>
+</body>
+</html>
