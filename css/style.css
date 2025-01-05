@@ -1,48 +1,122 @@
-/* Estilos específicos para a página de registro de glicose */
+/* Estilos gerais */
 body {
   font-family: Arial, sans-serif;
-  background-color: #f0f0f0;
+  background-color: #e3f2fd; /* Azul claro */
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  box-sizing: border-box;
 }
 
 header {
-  background-color: #4CAF50;
+  background-color: #42a5f5; /* Azul */
+  color: white;
   padding: 20px;
   text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
   margin: 0;
-  color: white;
 }
 
+main {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-grow: 1;
+  padding: 20px;
+  flex-direction: column;
+  margin-top: 100px; /* Evita que o formulário fique atrás do cabeçalho */
+}
+
+/* Formulário fixo no topo da página */
 form {
+  position: fixed; /* Faz o formulário ficar fixo */
+  top: 180px; /* Distância do topo da tela */
+  left: 50%;
+  transform: translateX(-50%); /* Centraliza o formulário */
   width: 300px;
-  margin: 0 auto;
   padding: 20px;
   background-color: white;
   border-radius: 5px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  animation: float 3s ease-in-out infinite;
+  z-index: 10; /* Garante que o formulário fique acima do conteúdo */
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+  100% {
+    transform: translateY(0);
+  }
 }
 
 label {
   display: block;
   margin-bottom: 8px;
+  font-size: 16px;
+  color: #42a5f5;
 }
 
 input, textarea {
   width: 100%;
-  padding: 8px;
+  padding: 10px;
   margin-bottom: 12px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+}
+
+input:focus, textarea:focus {
+  border-color: #42a5f5;
 }
 
 button {
   width: 100%;
-  padding: 10px;
-  background-color: #4CAF50;
+  padding: 12px;
+  background-color: #42a5f5;
   border: none;
   color: white;
   font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border-radius: 5px;
 }
 
 button:hover {
-  background-color: #45a049;
+  background-color: #1e88e5;
+}
+
+#historico {
+  margin-top: 20px;
+  width: 100%;
+  max-width: 400px;
+}
+
+#historico h2 {
+  color: #42a5f5;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+#lista-historico {
+  list-style: none;
+  padding: 0;
+}
+
+#lista-historico li {
+  background-color: white;
+  padding: 12px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }

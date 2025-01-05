@@ -1,3 +1,13 @@
+// Função para formatar a data no formato dia-mês-ano
+function formatarData(data) {
+  const dateObject = new Date(data);
+  const dia = String(dateObject.getDate()).padStart(2, "0");
+  const mes = String(dateObject.getMonth() + 1).padStart(2, "0"); // Meses começam do 0
+  const ano = dateObject.getFullYear();
+  return `${dia}-${mes}-${ano}`; // Formato dia-mês-ano
+}
+
+// Manipulando o envio do formulário
 document.getElementById('form-glicose').addEventListener('submit', function(event) {
   event.preventDefault();
 
@@ -12,15 +22,15 @@ document.getElementById('form-glicose').addEventListener('submit', function(even
   }
 
   const registros = JSON.parse(localStorage.getItem('registros')) || [];
-  registros.push({ valor, data, hora, observacao });
+  
+  // Formatando a data antes de salvar
+  const dataFormatada = formatarData(data);
+
+  registros.push({ valor, data: dataFormatada, hora, observacao });
   localStorage.setItem('registros', JSON.stringify(registros));
 
   // Atualiza o histórico
   atualizarHistorico();
-
-  // Disparar evento de armazenamento manualmente
-  const storageEvent = new Event('storage');
-  window.dispatchEvent(storageEvent);
 
   // Limpar formulário
   document.getElementById('form-glicose').reset();
@@ -41,10 +51,6 @@ function atualizarHistorico() {
       registros.splice(index, 1);
       localStorage.setItem('registros', JSON.stringify(registros));
       atualizarHistorico();
-
-      // Disparar evento de armazenamento manualmente
-      const storageEvent = new Event('storage');
-      window.dispatchEvent(storageEvent);
     });
 
     li.appendChild(btnRemover);
