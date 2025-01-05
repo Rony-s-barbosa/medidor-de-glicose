@@ -59,6 +59,13 @@ function mostrarDias(mesIndex) {
 
 // Mostrar gráfico do dia selecionado
 function mostrarGrafico(dia, mesIndex) {
+  // Limpar gráfico anterior
+  const ctx = document.getElementById("grafico").getContext("2d");
+  const graficoExistente = Chart.getChart("grafico");
+  if (graficoExistente) {
+    graficoExistente.destroy(); // Remover gráfico anterior
+  }
+
   document.getElementById("calendario-dias").classList.add("oculto");
   document.getElementById("grafico-dia").classList.remove("oculto");
 
@@ -74,7 +81,7 @@ function mostrarGrafico(dia, mesIndex) {
   const horas = registrosDia.map(registro => registro.hora);
   const valores = registrosDia.map(registro => registro.valor);
 
-  const ctx = document.getElementById("grafico").getContext("2d");
+  // Criar novo gráfico
   new Chart(ctx, {
     type: "line",
     data: {

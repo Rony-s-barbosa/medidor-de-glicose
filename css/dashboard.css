@@ -2,23 +2,33 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #f9f9f9;
+  background-color: #f0f4f8; /* Cor mais suave similar ao login */
 }
 
 header {
-  background-color: #6200ea;
+  background-color: #42a5f5; /* Cor da tela de login */
   color: white;
-  padding: 15px;
+  padding: 20px;
   text-align: center;
+  position: relative;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 header button {
   background-color: white;
-  color: #6200ea;
+  color: #42a5f5;
   border: none;
   padding: 10px;
   margin-top: 10px;
   cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 5px;
+}
+
+header button:hover {
+  background-color: #42a5f5;
+  color: white;
+  transform: translateY(-3px);
 }
 
 h1, h2 {
@@ -33,11 +43,17 @@ h1, h2 {
 }
 
 #ano-anterior, #ano-posterior {
-  background-color: #6200ea;
+  background-color: #42a5f5;
   color: white;
   border: none;
   padding: 10px;
   cursor: pointer;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+#ano-anterior:hover, #ano-posterior:hover {
+  background-color: #4500b5;
 }
 
 #ano-atual {
@@ -54,12 +70,19 @@ h1, h2 {
 }
 
 .meses-flutuantes button {
-  background-color: #6200ea;
+  background-color: #42a5f5;
   color: white;
   border: none;
   padding: 20px;
   font-size: 1em;
   cursor: pointer;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.meses-flutuantes button:hover {
+  background-color: #4500b5;
+  transform: translateY(-5px);
 }
 
 .dias-grid {
@@ -71,10 +94,18 @@ h1, h2 {
 
 .dias-grid button {
   background-color: #ffffff;
-  border: 1px solid #6200ea;
-  color: #6200ea;
+  border: 1px solid #42a5f5;
+  color: #42a5f5;
   padding: 15px;
   cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 5px;
+}
+
+.dias-grid button:hover {
+  background-color: #42a5f5;
+  color: white;
+  transform: translateY(-3px);
 }
 
 button {
@@ -103,4 +134,26 @@ canvas {
   right: 40px;
   top: 20px;
   width: 100px;
+}
+
+#voltar-meses, #voltar-dias {
+  background-color: #42a5f5;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+#voltar-meses:hover, #voltar-dias:hover {
+  background-color: #4500b5;
+}
+
+.meses-flutuantes button, .dias-grid button {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.meses-flutuantes button:hover, .dias-grid button:hover {
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
 }
