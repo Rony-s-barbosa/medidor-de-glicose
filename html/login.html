@@ -13,33 +13,29 @@
 
   <main>
     <section id="login-section">
-      <h2>Login</h2>
       <form id="login-form">
+        <h2>Login</h2>
         <label for="username">Usuário:</label>
         <input type="text" id="username" name="username" required>
-
         <label for="password">Senha:</label>
         <input type="password" id="password" name="password" required>
-
         <button type="submit">Entrar</button>
+        <!-- Alterei o tipo do botão de submit para button -->
+        <button type="button" id="show-register">Cadastrar-se</button>
       </form>
-
-      <button id="show-register">Cadastrar-se</button>
     </section>
 
     <section id="register-section" class="hidden">
-      <h2>Cadastrar-se</h2>
       <form id="register-form">
+        <h2>Cadastrar-se</h2>
         <label for="new-username">Novo Usuário:</label>
         <input type="text" id="new-username" name="new-username" required>
-
         <label for="new-password">Nova Senha:</label>
         <input type="password" id="new-password" name="new-password" required>
-
         <button type="submit">Cadastrar</button>
+        <!-- Alterei o tipo do botão de submit para button -->
+        <button type="button" id="back-to-login">Voltar ao Login</button>
       </form>
-
-      <button id="back-to-login">Voltar ao Login</button>
     </section>
   </main>
 
